@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('bookmarks', 'BookmarkController@index');
+Route::get('bookmarks/{bookmark}', 'BookmarkController@show')->name('bookmarks.show');
