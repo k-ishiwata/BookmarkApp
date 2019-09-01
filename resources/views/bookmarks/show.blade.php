@@ -29,6 +29,9 @@
                                 <td>{{ $bookmark->updated_at->format('Y年m月d日') }}</td>
                             </tr>
                         </table>
+                        <div>
+                            <a href="{{ route('bookmarks.index') }}" class="btn btn-secondary">戻る</a>
+                        </div>
                     </div>
                 </div>
             </div>

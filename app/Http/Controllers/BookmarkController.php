@@ -14,7 +14,7 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        $bookmarks = Bookmark::paginate(20);
+        $bookmarks = Bookmark::orderBy('id', 'desc')->paginate(20);
         return view('bookmarks.index', compact('bookmarks'));
     }
 
@@ -25,7 +25,7 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        //
+        return view('bookmarks.create');
     }
 
     /**
@@ -36,7 +36,8 @@ class BookmarkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Bookmark::create($request->all());
+        return redirect()->route('bookmarks.index');
     }
 
     /**
