@@ -5,9 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">ブックマーク登録</div>
+                    <div class="card-header">ブックマーク編集</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('bookmarks.store') }}">
+                        <form method="POST" action="{{ route('bookmarks.update', $bookmark) }}">
+                            @method('PUT')
                             @csrf
                             @include('bookmarks.fields')
                         </form>
