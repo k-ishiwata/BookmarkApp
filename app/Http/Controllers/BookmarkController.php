@@ -8,9 +8,7 @@ use App\Http\Requests\BookmarkRequest;
 class BookmarkController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -19,9 +17,7 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -29,10 +25,8 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param BookmarkRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BookmarkRequest $request)
     {
@@ -43,10 +37,8 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bookmark  $bookmark
-     * @return \Illuminate\Http\Response
+     * @param Bookmark $bookmark
+     * @return \Illuminate\View\View
      */
     public function show(Bookmark $bookmark)
     {
@@ -54,10 +46,8 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bookmark  $bookmark
-     * @return \Illuminate\Http\Response
+     * @param Bookmark $bookmark
+     * @return \Illuminate\View\View
      */
     public function edit(Bookmark $bookmark)
     {
@@ -65,11 +55,9 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bookmark  $bookmark
-     * @return \Illuminate\Http\Response
+     * @param BookmarkRequest $request
+     * @param Bookmark $bookmark
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(BookmarkRequest $request, Bookmark $bookmark)
     {
@@ -80,10 +68,9 @@ class BookmarkController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bookmark  $bookmark
-     * @return \Illuminate\Http\Response
+     * @param Bookmark $bookmark
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Bookmark $bookmark)
     {
