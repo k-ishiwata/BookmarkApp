@@ -21,6 +21,17 @@
                                 <td>{{ $bookmark->description }}</td>
                             </tr>
                             <tr>
+                                <th>タグ</th>
+                                <td>
+                                    @foreach($bookmark->tags as $tag)
+                                        <a href="{{ route('tags.show', $tag->id) }}">{{ $tag->title }}</a>
+                                        @unless($loop->last)
+                                            ,
+                                        @endunless
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>作成日</th>
                                 <td>{{ $bookmark->created_at->format('Y年m月d日') }}</td>
                             </tr>
