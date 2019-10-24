@@ -8,10 +8,9 @@
                     <div class="card-header">タグ登録</div>
                     <div class="card-body">
                         @include('components.alert')
-                        <form method="POST" action="{{ route('tags.store') }}">
-                            @csrf
+                        {!! Form::open(['route' => 'tags.store']) !!}
                             @include('tags.fields')
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

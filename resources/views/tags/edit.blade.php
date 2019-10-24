@@ -8,11 +8,12 @@
                     <div class="card-header">タグ編集</div>
                     <div class="card-body">
                         @include('components.alert')
-                        <form method="POST" action="{{ route('tags.update', $tag) }}">
-                            @method('PUT')
-                            @csrf
+                        {!! Form::model($tag, [
+                            'route' => ['tags.update', $tag],
+                            'method' => 'put'
+                        ]) !!}
                             @include('tags.fields')
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

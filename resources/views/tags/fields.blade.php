@@ -1,7 +1,10 @@
 <div class="form-group row">
-    <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
+    {!! Form::label('title', 'タイトル', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
-        <input type="text" name="title" value="{{ $tag->title ?? '' }}" class="form-control @error('title') is-invalid @enderror" id="inputTitle">
+        {!! Form::text('title', null, [
+            'class' => 'form-control'. ($errors->has('title') ? ' is-invalid' : ''),
+            'required'
+        ]) !!}
         @error('title')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>

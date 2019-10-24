@@ -1,7 +1,10 @@
 <div class="form-group row">
-    <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
+    {!! Form::label('title', 'タイトル', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
-        <input type="text" name="title" value="{{ $bookmark->title ?? '' }}" class="form-control @error('title') is-invalid @enderror" id="inputTitle">
+        {!! Form::text('title', null, [
+            'class' => 'form-control'. ($errors->has('title') ? ' is-invalid' : ''),
+            'required'
+        ]) !!}
         @error('title')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -11,9 +14,12 @@
 </div>
 
 <div class="form-group row">
-    <label for="inputUrl" class="col-sm-2 col-form-label">URL</label>
+    {!! Form::label('url', 'URL', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
-        <input type="text" name="url" value="{{ $bookmark->url ?? '' }}" class="form-control @error('url') is-invalid @enderror" id="inputUrl">
+        {!! Form::text('url', null, [
+            'class' => 'form-control'. ($errors->has('url') ? ' is-invalid' : ''),
+            'required'
+        ]) !!}
         @error('url')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -23,9 +29,12 @@
 </div>
 
 <div class="form-group row">
-    <label for="inputDescription" class="col-sm-2 col-form-label">説明文</label>
+    {!! Form::label('description', '説明文', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
-        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="5">{{ $bookmark->description ?? '' }}</textarea>
+        {!! Form::textarea('description', null, [
+            'class' => 'form-control'. ($errors->has('description') ? ' is-invalid' : ''),
+            'rows' => 5
+        ]) !!}
         @error('description')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -35,20 +44,16 @@
 </div>
 
 <div class="form-group row">
-    <label for="inputTag" class="col-sm-2 col-form-label">タグ</label>
+    {!! Form::label('tags', 'タグ', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
         @foreach($tags as $key => $tag)
             <div class="form-check form-check-inline">
-                <input
-                    type="checkbox"
-                    name="tags[]"
-                    value="{{ $key }}"
-                    id="tag{{ $key }}"
-                    @if(isset($bookmark->tags) && $bookmark->tags->contains($key))
-                        checked
-                    @endif
-                >
-                <label for="tag{{ $key }}" class="form-check-label">{{ $tag }}</label>
+                {!! Form::checkbox('tags[]', $key, null, [
+                    'id' => 'tag'.$key
+                ]) !!}
+                {!! Form::label('tag'.$key, $tag, [
+                    'class' => 'form-check-label'
+                ]) !!}
             </div>
         @endforeach
         @error('tags')

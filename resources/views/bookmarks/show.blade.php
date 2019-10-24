@@ -24,7 +24,7 @@
                                 <th>タグ</th>
                                 <td>
                                     @foreach($bookmark->tags as $tag)
-                                        <a href="{{ route('tags.show', $tag->id) }}">{{ $tag->title }}</a>
+                                        {!! link_to_route('tags.show', $tag->title, $tag) !!}
                                         @unless($loop->last)
                                             ,
                                         @endunless

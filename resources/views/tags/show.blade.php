@@ -19,10 +19,12 @@
                             @foreach($bookmarks as $bookmark)
                                 <tr>
                                     <td class="align-middle">{{ $bookmark->id }}</td>
-                                    <td class="align-middle"><a href="{{ $bookmark->url }}">{{ $bookmark->title }}</a></td>
+                                    <td class="align-middle">
+                                        {!! link_to($bookmark->url, $bookmark->title) !!}
+                                    </td>
                                     <td class="align-middle">
                                         @foreach($bookmark->tags as $tag)
-                                            <a href="{{ route('tags.show', $tag->id) }}">{{ $tag->title }}</a>
+                                            {!! link_to_route('tags.show', $tag->title, $tag) !!}
                                             @unless($loop->last)
                                                 ,
                                             @endunless
@@ -30,13 +32,19 @@
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex">
-                                            <a href="{{ route('bookmarks.show', $bookmark) }}" class="btn btn-secondary btn-sm">表示</a>
-                                            <a href="{{ route('bookmarks.edit', $bookmark) }}" class="btn btn-secondary btn-sm ml-1">編集</a>
-                                            <form method="POST" action="{{ route('bookmarks.destroy', $bookmark) }}">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button onclick="return confirm('本当に削除しますか？')" class="btn btn-secondary btn-sm ml-1">削除</button>
-                                            </form>
+                                            {!! link_to_route('bookmarks.show', '表示', $bookmark, [
+                                                'class' => 'btn btn-secondary btn-sm'
+                                            ]) !!}
+                                            {!! link_to_route('bookmarks.edit', '編集', $bookmark, [
+                                                'class' => 'btn btn-secondary btn-sm ml-1'
+                                            ]) !!}
+
+                                            {!! Form::model($bookmark, [
+                                                'route' => ['bookmarks.destroy', $bookmark],
+                                                'method' => 'delete'
+                                            ]) !!}
+                                            <button onclick="return confirm('本当に削除しますか？')" class="btn btn-secondary btn-sm ml-1">削除</button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </td>
                                 </tr>

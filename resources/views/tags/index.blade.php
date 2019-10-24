@@ -8,7 +8,9 @@
                     <div class="card-header">タグ一覧</div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('tags.create') }}" class="btn btn-primary">新規登録</a>
+                            {!! link_to_route('tags.create', '新規登録', null, [
+                                'class' => 'btn btn-primary'
+                            ]) !!}
                         </div>
                         @include('components.alert')
                         <table class="table table-striped">
@@ -25,13 +27,18 @@
                                     <td class="align-middle">{{ $tag->title }}</td>
                                     <td class="align-middle">
                                         <div class="d-flex">
-                                            <a href="{{ route('tags.show', $tag) }}" class="btn btn-secondary btn-sm">表示</a>
-                                            <a href="{{ route('tags.edit', $tag) }}" class="btn btn-secondary btn-sm ml-1">編集</a>
-                                            <form method="POST" action="{{ route('tags.destroy', $tag) }}">
-                                                @method('DELETE')
-                                                @csrf
+                                            {!! link_to_route('tags.show', '表示', $tag, [
+                                                'class' => 'btn btn-secondary btn-sm'
+                                            ]) !!}
+                                            {!! link_to_route('tags.edit', '編集', $tag, [
+                                                'class' => 'btn btn-secondary btn-sm ml-1'
+                                            ]) !!}
+                                            {!! Form::model($tag, [
+                                                'route' => ['tags.destroy', $tag],
+                                                'method' => 'delete'
+                                            ]) !!}
                                                 <button onclick="return confirm('本当に削除しますか？')" class="btn btn-secondary btn-sm ml-1">削除</button>
-                                            </form>
+                                            {!! Form::close() !!}
                                         </div>
                                     </td>
                                 </tr>

@@ -8,11 +8,12 @@
                     <div class="card-header">ブックマーク編集</div>
                     <div class="card-body">
                         @include('components.alert')
-                        <form method="POST" action="{{ route('bookmarks.update', $bookmark) }}">
-                            @method('PUT')
-                            @csrf
+                        {!! Form::model($bookmark, [
+                            'route' => ['bookmarks.update', $bookmark],
+                            'method' => 'put'
+                        ]) !!}
                             @include('bookmarks.fields')
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
