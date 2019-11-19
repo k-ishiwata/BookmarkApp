@@ -14,6 +14,11 @@
 
 Auth::routes();
 
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')
+    ->where('provider', 'github');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')
+    ->where('provider', 'github');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'BookmarkController@index');
     Route::resource('bookmarks', 'BookmarkController');

@@ -62,6 +62,13 @@
                                         パスワードをお忘れですか？
                                     </a>
                                 @endif
+
+                                <hr>
+
+                                <p>SNSアカウントでログイン</p>
+                                <a href="/login/github" class="btn btn-secondary">
+                                    Github
+                                </a>
                             </div>
                         </div>
                     </form>

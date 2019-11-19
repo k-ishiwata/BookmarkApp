@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,5 +37,47 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * OAuth ページにリダイレクト
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * OAuthユーザー認証＆作成
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        try {
+            $socialUser = Socialite::with($provider)->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
+
+        $user = User::where([
+            'provider_id' => $socialUser->getId(),
+            'provider_name' => $provider
+        ])->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $socialUser->getNickname(),
+                'email' => $socialUser->getEmail(),
+                'provider_id' => $socialUser->getId(),
+                'provider_name' => $provider
+            ]);
+        }
+
+        auth()->login($user, true);
+
+        return redirect()->to($this->redirectTo);
     }
 }
